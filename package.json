@@ -1,0 +1,33 @@
+{
+  "name": "git-test",
+  "version": "1.0.0",
+  "description": "This is a test directory to show the workings of Git and Nodejs.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run lite",
+    "lite":"lite-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victorhlab/Coursera-webdev-react.git"
+  },
+  "keywords": [
+    "Git",
+    "basics",
+    "and",
+    "Node",
+    "JS",
+    "getting",
+    "started"
+  ],
+  "author": "Victor Labuschagne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victorhlab/Coursera-webdev-react/issues"
+  },
+  "homepage": "https://github.com/Victorhlab/Coursera-webdev-react#readme",
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  }
+}
