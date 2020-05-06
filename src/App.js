@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       <Navbar dark color="primary">
         <div className="container">
-          <NavbarBrand href="/">Ristorante Con Fusion</NavbarBrand>
+          <NavbarBrand href="/">Vision Mission Fusion</NavbarBrand>
          
         </div>
       </Navbar>
