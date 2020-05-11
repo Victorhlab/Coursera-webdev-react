@@ -66,14 +66,16 @@ class DishDetail extends Component {
         }
             
         return( <div>
-            <div className="row">
-                <div className="col-12 col-md-5 m-1">
-                    {dishdetail}
-                </div>
-                <div className="col-12 col-md-5 m-1">
-                    <ul>
-                        {comments}
-                    </ul>
+            <div className="container">
+                <div className="row">
+                    <div className="col-12 col-md-5 m-1">
+                        {dishdetail}
+                    </div>
+                    <div className="col-12 col-md-5 m-1">
+                        <ul>
+                            {comments}
+                        </ul>
+                    </div>
                 </div>
             </div>
             
