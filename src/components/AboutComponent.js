@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 function RenderLeader({leader})
 {
     return (
-        <Media key={leader.id} tag="li" className="mt-1">
-            <Media left className="mr-5">
+        <Media tag="li" className="mt-1">
+            <Media key={leader.id} left className="mr-5">
                 <Media object src={leader.image} alt={leader.name} />
             </Media>
             <Media body>
@@ -23,8 +23,7 @@ function About(props) {
 
     const leaders = props.leaders.map((leader) => {
         return (
-            <RenderLeader leader={leader}/>
-            
+            <RenderLeader leader={leader} key={leader.id} />
         );
     });
 
