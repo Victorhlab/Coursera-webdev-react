@@ -27,7 +27,8 @@ class Contact extends Component {
         this.handleBlur = this.handleBlur(this);       
     }
 
-
+    /* Controlled forms. Uses the state for the value of the form input  */
+    /* For Uncontrolled forms look at the header component: login */
     handleInputChange(event){
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;

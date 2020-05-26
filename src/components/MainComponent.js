@@ -9,12 +9,15 @@ import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 
+/* withRouter - required for configuring rect comp to connect to Redux*/
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
-/* state is from redux store */
+/* mapStateToProps function. Maps redux store to Props
+   State is from redux store */
 const mapStateToProps =  state => {
   return {
+     /* props : state */
       dishes: state.dishes,
       comments: state.comments,
       promotions: state.promotions,
