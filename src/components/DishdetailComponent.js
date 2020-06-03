@@ -31,8 +31,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
 
         handleComment(value){
             this.toggleModal();
-            console.log("Current State is: " + JSON.stringify(value));
-            alert("Current sate is: " + JSON.stringify(value));
+            this.props.addComment(this.props.dishId, value.rating, value.author, value.comment)
            
         }
 
@@ -63,15 +62,15 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
                                 </Col>
                             </Row>
                             <Row className="form-group">
-                                <Label htmlFor="yourname" md={12}>Your Name</Label>
+                                <Label htmlFor="author" md={12}>Your Name</Label>
                                 <Col md={12}>
-                                    <Control.text model=".yourname" id="yourname" name="yourname"
+                                    <Control.text model=".author" id="author" name="author"
                                         className="form-control"
                                         validators={{minLength: minLength(3), maxLength: maxLength(15)}}
                                     />
                                     <Errors 
                                         className="text-danger"
-                                        model='.yourname'
+                                        model='.author'
                                         show="touched"
                                         messages={{
                                             /* if required is true- will display */
@@ -97,7 +96,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
         }
     }
     
-    function RenderComments({commentsArr}){
+    function RenderComments({commentsArr, addComment, dishId}){
         var commentSection = (<div></div>);
 
         if(commentsArr != null)
@@ -119,7 +118,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
                 <div>
                     <h4>Comments</h4>
                     {comments}
-                    <CommentForm/>
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                 </div>
             );  
         }
@@ -155,7 +154,10 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
 
         if(props.dish != null) {
             var dishdetail = <RenderDish dish={props.dish} />
-            var comments   = <RenderComments commentsArr={props.comments} />
+            var comments   = <RenderComments commentsArr={props.comments} 
+                              addComment={props.addComment}
+                              dishId={props.dish.id}
+                            />
         }
             
         return( <div>

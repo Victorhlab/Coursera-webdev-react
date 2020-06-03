@@ -13,6 +13,8 @@ import About from './AboutComponent';
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import {addComment} from '../redux/ActionCreators';
+
 /* mapStateToProps function. Maps redux store to Props
    State is from redux store */
 const mapStateToProps =  state => {
@@ -24,6 +26,15 @@ const mapStateToProps =  state => {
       leaders: state.leaders
   } 
 }
+
+/* Fn receive dispatch as a parm, 
+   this dispatch is the dispatch fn from our store */
+const mapDispatchToProps = (dispatch) => ({
+  /*addcomment property: takes these 4 parameters => then dispatch(action)  */ 
+                                                                 /* addComment returns a ActionObject*/
+  // PROPS                                      => dispatch 
+  addComment: (dishId, rating, author, comment) => dispatch(addComment(dishId, rating, author, comment))
+});
 
 class Main extends Component {
 
@@ -43,7 +54,9 @@ class Main extends Component {
       const DishWithId = ({match}) => {
         return(
             <DishDetail dish={this.props.dishes.filter((dish) => dish.id === parseInt(match.params.dishId,10))[0]} 
-              comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} />
+              comments={this.props.comments.filter((comment) => comment.dishId === parseInt(match.params.dishId,10))} 
+              addComment={this.props.addComment}
+              />
         );
       };
 
@@ -67,5 +80,7 @@ class Main extends Component {
   
 }
 
-/* connecting component to react router */
-export default withRouter(connect(mapStateToProps)(Main));
+/* connecting component to react router */    
+                          /*mapDispatchToProps Makes it avail in the main component above i.e usage of : this.props.addComment
+                            and connect the dispatch() as an input parameter of mapDispatchToProps */
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

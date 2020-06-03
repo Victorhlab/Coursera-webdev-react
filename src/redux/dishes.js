@@ -5,6 +5,7 @@ import {DISHES} from '../components/shared/dishes';
 export const Dishes = (state = DISHES, action) => {
     switch(action.type) {
         default:
+            console.log("hallo from DISHES");
             return state;
     }
 }
