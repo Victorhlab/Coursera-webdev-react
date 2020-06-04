@@ -8,13 +8,20 @@ import {applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
+import {createForms} from 'react-redux-form'
+import {InitialFeedback} from './forms'
+
 export const ConfigureStore = () => {
     const store = createStore(
         combineReducers({
             dishes: Dishes,
             comments: Comments,
             promotions: Promotions,
-            leaders: Leaders
+            leaders: Leaders,
+            /* react redux form reducer fn: */
+            ...createForms({
+                feedback: InitialFeedback
+            }) 
         }),
         /* pass enhancers to our store */
         applyMiddleware(thunk, logger)
