@@ -1,5 +1,5 @@
 
-import {LEADERS} from '../components/shared/leaders';
+import {LEADERS} from '../shared/leaders';
 
 /* reducer function; input is state and action
    Initializing state to LEADERS */

@@ -1,4 +1,4 @@
-import {COMMENTS} from '../components/shared/comments';
+import {COMMENTS} from '../shared/comments';
 import * as ActionTypes from './ActionTypes';
 
 /* reducer function; input is state and action

@@ -1,4 +1,4 @@
-import {PROMOTIONS} from '../components/shared/promotions';
+import {PROMOTIONS} from '../shared/promotions';
 
 
 /* reducer function; input is state and action

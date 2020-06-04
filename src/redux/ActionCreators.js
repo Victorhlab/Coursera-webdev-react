@@ -1,6 +1,6 @@
 /* Import everything (all the exports) that is exported form ActionTypes */
 import * as ActionTypes from './ActionTypes';
-import {DISHES} from '../components/shared/dishes';
+import {DISHES} from '../shared/dishes';
 
 /* Define the Action object:  Action has a type property and a payload*/
 /* returns a JS object */
