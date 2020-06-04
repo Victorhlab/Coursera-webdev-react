@@ -8,6 +8,7 @@ import { Control, LocalForm, Errors} from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import {Loading } from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 const maxLength=(length) => (val) => !(val) || (val.length <= length);
 const minLength=(length) => (val) => (val) && (val.length >= length);
@@ -99,33 +100,31 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
     }
     
     function RenderComments({commentsArr, postComment, dishId}){
-        var commentSection = (<div></div>);
-
         if(commentsArr != null)
-        {
-             /*comment form component*/
-            var comments = commentsArr.map( (item) => {
-                    return(
-                        <div key={item.id} >
-                            <li className="list-unstyled">
-                                <p>{item.comment}</p>
-                                <p>--{item.author}, {new Intl.DateTimeFormat('en-US', {year:'numeric', month:'short', day:'2-digit'} ).format( new Date(Date.parse(item.date)))}</p>
-                            </li>
-                        </div>
-                    )
-                }
-            );
-
-            commentSection = (
-                <div>
+            return (
+                <div className="col-12 col-md-10 m-1">
                     <h4>Comments</h4>
-                    {comments}
+                    <ul className="list-unstyled">
+                        <Stagger in>
+                            {commentsArr.map((comment) => {
+                                return (
+                                    <Fade in>
+                                        <li key={comment.id}>
+                                            <p>{comment.comment}</p>
+                                            <p>--{comment.author}, {new Intl.DateTimeFormat('en-US', {year:'numeric', month:'short', day:'2-digit'} ).format( new Date(Date.parse(comment.date)))}</p>
+                                        </li>
+                                    </Fade>
+                                );
+                            })}
+                        </Stagger>
+                    </ul>
                     <CommentForm dishId={dishId} postComment={postComment}/>
                 </div>
-            );  
-        }
-
-        return commentSection;
+            );
+        else    
+           return(<div></div>);
+        
+ 
     }
 
     function RenderDish({dish}) {
@@ -135,13 +134,15 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
         {
             dishToRender = (
                 <div>
-                    <Card>
-                        <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
-                        <CardBody>
-                            <CardTitle> {dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
-                        </CardBody>
-                    </Card>
+                    <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translate(-50%)'}}>
+                        <Card>
+                            <CardImg width="100%" src={baseUrl + dish.image} alt={dish.name} />
+                            <CardBody>
+                                <CardTitle> {dish.name}</CardTitle>
+                                <CardText>{dish.description}</CardText>
+                            </CardBody>
+                        </Card>
+                    </FadeTransform>
                 </div>
             );
         }
