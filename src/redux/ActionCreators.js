@@ -32,6 +32,7 @@ export const postComment = (dishId ,rating, author, comment) => (dispatch) => {
         credentials: 'same-origin'
     })
     .then(response=> {
+       
         if(response.ok) {
             return(response); /* This returns the response to the next .then(...) */
         }
