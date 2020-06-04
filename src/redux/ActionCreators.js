@@ -8,14 +8,51 @@ import {baseUrl} from '../shared/baseUrl';
 /* This is sent to the STORE */
 export const addComment = (dishId, rating, author, comment ) =>  ({
     type: ActionTypes.ADD_COMMENT,
-    payload:  {
-        /* payload : input Param */
+    payload: comment
+});
+
+/*action creator call */                                     /* since this is a Thunk need to add dispatch here */
+export const postComment = (dishId ,rating, author, comment) => (dispatch) => {
+
+    const newComment = {
         dishId: dishId,
         rating: rating,
         author: author,
         comment: comment
     }
-});
+    newComment.date = new Date().toISOString();
+
+    /* POST operation */
+    return fetch(baseUrl+'comments' , {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+    .then(response=> {
+        if(response.ok) {
+            return(response); /* This returns the response to the next .then(...) */
+        }
+        else{
+            /* generate new error object */
+            var error = new Error('Error ' + response.status + ': ' + response.statusText);
+            error.response = response;
+            throw error; //throw and catch error
+        }
+    }, 
+    /* error handler: if the server does not even respond */
+    error => {
+        var errmess = new Error(error.message);
+        throw errmess;
+    })
+    .then(response => response.json())
+    /* So the postComment sends the comment to the server first. IF this succeeds, then the comment is added */
+    .then(response => dispatch(addComment(response)))
+    .catch(error=> {console.log('Post comments', error.message) 
+                    alert('Your Comment could not be posted: \nError ' + error.message)})
+}
 
 /*  Middleware:
     created as a THUNK, returns a fn */

@@ -18,8 +18,10 @@ import * as ActionTypes from './ActionTypes';
         case ActionTypes.ADD_COMMENT:
             var comment = action.payload;
             /* the server should generate the comment id */
-            comment.id   = state.comments.length;
-            comment.date = new Date().toISOString();
+
+            //Removed: now done in postComment()
+            //comment.id   = state.comments.length;
+            //comment.date = new Date().toISOString();
 
             /* remember: cannot mod the state we are sent in as parameter,
                we can add to it and return the modified version of it. But cannot directly 

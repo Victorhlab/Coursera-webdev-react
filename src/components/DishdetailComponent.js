@@ -33,7 +33,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
 
         handleComment(value){
             this.toggleModal();
-            this.props.addComment(this.props.dishId, value.rating, value.author, value.comment)
+            this.props.postComment(this.props.dishId, value.rating, value.author, value.comment)
            
         }
 
@@ -98,7 +98,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
         }
     }
     
-    function RenderComments({commentsArr, addComment, dishId}){
+    function RenderComments({commentsArr, postComment, dishId}){
         var commentSection = (<div></div>);
 
         if(commentsArr != null)
@@ -120,7 +120,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
                 <div>
                     <h4>Comments</h4>
                     {comments}
-                    <CommentForm dishId={dishId} addComment={addComment}/>
+                    <CommentForm dishId={dishId} postComment={postComment}/>
                 </div>
             );  
         }
@@ -176,7 +176,7 @@ const minLength=(length) => (val) => (val) && (val.length >= length);
         if(props.dish != null) {
             var dishdetail = <RenderDish dish={props.dish} />
             var comments   = <RenderComments commentsArr={props.comments} 
-                              addComment={props.addComment}
+                              postComment={props.postComment}
                               dishId={props.dish.id}
                             />
         }
