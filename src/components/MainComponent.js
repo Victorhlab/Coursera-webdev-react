@@ -12,7 +12,7 @@ import About from './AboutComponent';
 /* withRouter - required for configuring rect comp to connect to Redux*/
 import {Switch, Route, Redirect, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {postComment, fetchDishes, fetchComments, fetchPromos}  from '../redux/ActionCreators';
+import {postComment, fetchDishes, fetchComments, fetchPromos, fetchLeaders, postFeedback}  from '../redux/ActionCreators';
 import {actions} from 'react-redux-form';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -40,6 +40,9 @@ const mapDispatchToProps = (dispatch) => ({
   resetFeedbackForm: () => {dispatch(actions.reset('feedback'))},
   fetchComments: () => {dispatch(fetchComments())},
   fetchPromos: () => {dispatch(fetchPromos())},
+  fetchLeaders: () => {dispatch(fetchLeaders())},  
+  postFeedback: (firstname, lastname, telnum, email,  
+                 agree, contactType, message ) => dispatch(postFeedback(firstname, lastname, telnum, email, agree, contactType, message))
 });
 
 class Main extends Component {
@@ -52,6 +55,7 @@ class Main extends Component {
     this.props.fetchDishes();
     this.props.fetchComments();
     this.props.fetchPromos();
+    this.props.fetchLeaders();
   }
 
   render () {
@@ -67,7 +71,9 @@ class Main extends Component {
                 promosLoading={this.props.promotions.isLoading}
                 promosErrMess={this.props.promotions.errMess}
 
-                leader={this.props.leaders.filter((leader) => leader.featured)[0]}
+                leader={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}
+                leaderLoading={this.props.leaders.isLoading}
+                leaderErrMess={this.props.leaders.errMess}
             />
         );
       }
@@ -95,7 +101,9 @@ class Main extends Component {
              <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
                 <Switch>
                     <Route path="/home" component={HomePage} />
-                    <Route path="/contactus" component={()=> <Contact resetFeedbackForm={this.props.resetFeedbackForm} /> } />
+                    <Route path="/contactus" component={()=> <Contact resetFeedbackForm={this.props.resetFeedbackForm} 
+                                                                      postFeedback={this.props.postFeedback}       
+                                                              /> } />
                     <Route path="/aboutus" component={()=> <About leaders={this.props.leaders} /> } />
 
                     <Route exact path="/menu" component={()=> <Menu dishes={this.props.dishes} /> } />

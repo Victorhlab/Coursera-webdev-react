@@ -37,8 +37,18 @@ class Contact extends Component {
     }*/
 
     handleSubmit(value) {
-        console.log("Current State is: " + JSON.stringify(value));
-        alert("Current sate is: " + JSON.stringify(value));
+        // POST to SERVER 
+        console.log("handleSubmit : " + JSON.stringify(value));
+        
+        this.props.postFeedback(value.firstname, 
+                                value.lastname, 
+                                value.telnum,
+                                value.email,
+                                value.agree,
+                                value.contactType,
+                                value.message,
+                                )
+
         this.props.resetFeedbackForm();
     }
 
@@ -81,7 +91,7 @@ class Contact extends Component {
     }*/
 
     render(){
-        // replacec by react redux form const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
+        // replace by react redux form const errors = this.validate(this.state.firstname, this.state.lastname, this.state.telnum, this.state.email);
 
         return(
             <div className="container">
