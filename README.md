@@ -1,5 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+## Dependancies
+Also clone the "Coursera-json-server" project. This server project is used to serve a host which provide
+server data to this client Coursera-webdev-react.
 ## Available Scripts
 
 In the project directory, you can run:
